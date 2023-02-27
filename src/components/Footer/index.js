@@ -15,7 +15,7 @@ export default function Footer() {
 
         <h5 className='flex flex-col items-center  hover:text-amber-600'>
              <MdLiveTv className='text-2xl text-slate-500  hover:text-amber-600'/>
-             <span className='text-slate-500 text-sm font-semibold  hover:text-amber-600'>Streams</span>
+             <span className='text-slate-500 text-sm font-semibold  hover:text-amber-600'>Go live</span>
         </h5> 
 
         <h5 className='flex flex-col items-center  hover:text-amber-600'>
