@@ -1,6 +1,11 @@
 import React from 'react'
 import  bgImg from "../../assets/post4.jpeg"
 import userImg from "../../assets/storieImg.png"
+import {BsFillGridFill,BsImages} from "react-icons/bs"
+import {BiGitRepoForked} from "react-icons/bi"
+import {RiTeamFill } from "react-icons/ri"
+import {GoKebabVertical,GoFileSubmodule} from "react-icons/go"
+
 
 export default function Details() {
   return (
@@ -19,7 +24,7 @@ export default function Details() {
             </div>
          </div>
 
-           <div className='w-full flex px-4 py-2 bg-slate-900 justify-between'>
+           <div className='w-full flex px-4 py-2 bg-slate-900 justify-between items-center'>
               <main className='flex justify-between w-3/5'>
                 <h5 className='flex flex-col items-center '>
                     <span className='text-sm'>{"128"}</span>
@@ -38,7 +43,7 @@ export default function Details() {
 
                 <main className='flex'>
                       {/* <button></button> */}
-                      <button className='bg-orange-600  text-sm px-2 font-smeibold rounded-lg'> Edit profile</button>
+                      <button className='bg-orange-600  text-sm px-3 font-smeibold rounded-lg py-2 '> Create profile</button>
                 </main>
 
            </div>
@@ -50,6 +55,20 @@ export default function Details() {
                  </p>
                  
              </div>
+
+
+             <div className='w-full  relative z-30 px-8'>
+                         <main className='flex  pb-4 absolute w-full space-x-12  '>
+                            <BsFillGridFill className='text-2xl text-slate-500 hover:text-amber-700'/>
+                            <BiGitRepoForked className='text-2xl text-slate-500 hover:text-amber-700'/>
+                            <RiTeamFill  className='text-2xl text-slate-500 hover:text-amber-700'/>
+                            <GoFileSubmodule  className='text-2xl text-slate-500 hover:text-amber-700'/>
+                            <BsImages className='text-2xl text-slate-500 hover:text-amber-700'/>
+                         </main>
+
+                         inex
+
+                    </div>
     </div>
   )
 }

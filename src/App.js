@@ -19,20 +19,34 @@ import PopularStories from './pages/Stories/popular';
 import ForYou from './pages/Stories/forYou';
 import FollowingStories from './pages/Stories/following';
 import Notfications from './pages/Notifications';
+import LandingPage from './pages/LandingPage';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import CreateProfile from './pages/UserProfile/createProfile';
+import SecondLayout from './layouts/secondLayout';
+import Projects from './pages/Projects';
+import Developers from './pages/Developers';
+import Store from './pages/Store';
+
 
 
 function App() {
   return (
      <div className="App overflow-hidden">
           <Routes>
-              <Route exact path="/" element={<MainLayout><Home /></MainLayout>} >
+              <Route  exact path="/" element={<LandingPage />} />
+              <Route  exact path="/signup" element={<SignUp />} />
+              <Route  exact path="/signin" element={<SignIn/>} />
+              
+              <Route exact path="/home" element={<MainLayout><Home /></MainLayout>} >
                    <Route  exact path="" element={<Popular/>} />
                    <Route  exact path="latest-posts" element={<FriendsPosts />} />
                    <Route  exact path="friends-posts" element={<Latests />} />
               </Route>
              
-              <Route  exact path="/profile" element={<UserProfile />} />
-              <Route  exact path="/user" element={<GuestProfile />} />
+              <Route  exact path="/profile" element={<SecondLayout><UserProfile /></SecondLayout>} />
+              <Route  exact path="/create-profile" element={<SecondLayout><CreateProfile  /></SecondLayout>} />
+              <Route  exact path="/user" element={ <SecondLayout><GuestProfile /></SecondLayout>} />
               <Route  exact path="/messenger" element={<OtherLayout ><Messenger /></OtherLayout >} />
               <Route  exact path="/chat" element={<ChatBox />} />
               <Route  exact path="/live" element={< LiveStudio />} />
