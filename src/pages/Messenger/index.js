@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import {GoKebabVertical,GoFileSubmodule,GoPrimitiveDot} from "react-icons/go"
 import {MdAdd} from "react-icons/md"
@@ -6,8 +6,36 @@ import StorieImg from "../../assets/storieImg.png"
 import {BsDot} from "react-icons/bs"
 import Friend from './friends'
 import ChatBox from './ChatBox'
+import { useAuth } from '../../utils/auth'
+import { Client } from '@xmtp/xmtp-js'
+
 
 export default function Messenger() {
+    
+        
+    const { connectWallet} =useAuth()
+    
+     
+    useEffect(()=>{
+
+        const initClient=async()=>{
+          
+            const provider = await connectWallet();
+        
+            const signer = provider.getSigner();
+
+            const account = await signer.getAddress();
+     
+
+            const xmtp = await Client.create( signer)
+            console.log( xmtp,"xxxxx")
+         
+        }
+        initClient()
+      },[])
+
+
+
   return (
     <>
     <div>

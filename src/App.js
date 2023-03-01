@@ -28,11 +28,14 @@ import Projects from './pages/Projects';
 import Developers from './pages/Developers';
 import Store from './pages/Store';
 
-
+import {LivepeerConfig} from '@livepeer/react';
+import { livepeerClient } from './utils/livepeer.config';
+import MakeStories from './pages/Stories/makeStories';
 
 function App() {
   return (
      <div className="App overflow-hidden">
+         <LivepeerConfig client={livepeerClient}>
           <Routes>
               <Route  exact path="/" element={<LandingPage />} />
               <Route  exact path="/signup" element={<SignUp />} />
@@ -56,8 +59,9 @@ function App() {
                </Route>
 
                <Route  exact path="/notifications" element={<OtherLayout ><Notfications /></OtherLayout >} />
+               <Route  exact path="/makestories" element={< MakeStories />} />
           </Routes>
-               
+          </LivepeerConfig>   
      </div>
   );
 }

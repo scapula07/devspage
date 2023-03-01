@@ -2,10 +2,10 @@ import React from 'react'
 import {AiFillCloseCircle,AiOutlineClose,AiOutlineComment} from "react-icons/ai"
 import userImg from "../../assets/storieImg.png"
 import {MdSend} from "react-icons/md"
+import { useCreateStream, Player ,ThemeConfig } from '@livepeer/react';
 
 
-
-export default function Stream() {
+export default function Stream({stream}) {
   return (
     <div className='bg-slate-800 relative h-screen w-screen overflow-y-scroll text-white '>
             <div className='w-full '>
@@ -21,9 +21,18 @@ export default function Stream() {
                     <AiFillCloseCircle className='text-3xl'/>
                 </div>
             </div>
+             
+            <div className='h-screen flex justify-center'>
+                     <Player 
+                          title={stream?.name}
+                          playbackId={stream?.playbackId}
+                          autoPlay
+                          muted
+                       />
+               </div>
 
 
-            <div className='absolute w-full bottom-0 h-20  '>
+            <div className='absolute w-full bottom-0 h-20  z-30'>
                      <main className='flex items-center space-x-2 px-4 py-2 '>
                        
                       </main>
