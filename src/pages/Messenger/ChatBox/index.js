@@ -1,13 +1,19 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import {GoKebabVertical,GoFileSubmodule,GoPrimitiveDot} from "react-icons/go"
 import StorieImg from "../../../assets/storieImg.png"
 import {MdSend} from "react-icons/md"
-
+import { useLocation,useParams} from "react-router-dom";
 
 
 
 export default function ChatBox() {
+    const location =useLocation()
+    const [locationState,setlocationState] = useState(location.state)
+    const {conv,client}=locationState
+
+    console.log(conv)
+    console.log(client)
   return (
     <div className='bg-slate-800 relative h-screen text-white'>
         <div className='flex w-full justify-between items-center bg-slate-800 py-6 absolute  z-10 pr-8 border-b border-slate-900 '>

@@ -9,7 +9,7 @@ export default function Friend({friend}) {
         </main>
         <main className='flex w-full justify-between'>
             <div className='flex flex-col space-y-1'>
-                <h5 className=' font-semibold'>{friend.name}</h5>
+                <h5 className=' font-semibold'>{friend?.peerAddress?.slice(0,7)+ "..." +friend?.peerAddress?.slice(-4)}</h5>
                 <h5 className='text-slate-200'>{"Hey!How's it going?"}</h5>
             </div>
             

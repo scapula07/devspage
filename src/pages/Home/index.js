@@ -1,11 +1,12 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import Stories from './stories'
 import Events from './events'
 import Posts from './Posts'
 
 
-
 export default function Home() {
+
+
   return (
     <div className='w-full ' style={{"height":"100vh"}}>
 

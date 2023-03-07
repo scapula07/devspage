@@ -1,22 +1,33 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import bgImg from "../../assets/post4.jpeg"
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import { useMutation } from "@apollo/client";
 import { LOGIN_GET_MESSAGE, LOGIN_VERIFY } from '../../graphql/auth';
-import { AddressState,AccessTokenState } from '../../recoil/globalState';
+import { AddressState,AccessTokenState,UserState } from '../../recoil/globalState';
 import { useRecoilState } from 'recoil';
 import { useAuth } from '../../utils/auth';
+import { logIn } from '../../firebase';
+import { useNavigate } from "react-router-dom";
+import { auth } from '../../firebase';
+import { doc,getDoc,setDoc }  from "firebase/firestore";
+
 
 export default function SignIn() {
+    let navigate = useNavigate();
+
     const [address,setAddress]=useRecoilState(AddressState)
-    const [accessToken,setAccessToken]=useRecoilState(AccessTokenState)
+    const [accessToken,setAccessToken]=useState("")
+    const [email,setEmail]=useState()
+    const [password,setPassword]=useState()
+    const [userId,setUserId]=useRecoilState(UserState)
+
 
     const [loginGetMessage] = useMutation(LOGIN_GET_MESSAGE);
 	const [loginVerify] = useMutation(LOGIN_VERIFY);
      
     const { connectWallet} =useAuth()
      
-    const handleOnClick = async () => {
+    const getAccessToken = async () => {
         try{
             const provider = await connectWallet();
             console.log(provider,"pppp")
@@ -53,11 +64,22 @@ export default function SignIn() {
 				},
 			});
 			const accessToken = accessTokenResult?.data?.loginVerify?.accessToken;
+            localStorage.setItem("accessToken",accessToken)
             console.log(accessToken,"access")
             setAccessToken(accessToken);
         }catch(e){
             console.log(e)
         }
+    }
+
+
+    const siginIn =async()=>{
+         
+        const userCredential  = await logIn(email,password)
+        const user=userCredential?.user
+        // setUserId(user?.uid)
+        getAccessToken()
+        navigate('/home')
     }
 
   return (
@@ -78,13 +100,19 @@ export default function SignIn() {
 
                <main className='flex flex-col space-y-6'>
                     {/* <input className='py-3 px-5 rounded-full text-sm  font-semibold' placeholder="Username"/> */}
-                    <input className='py-3 px-5 rounded-full text-sm  font-semibold text-black' placeholder="Email"/>
-                    <input className='py-3 px-5 rounded-full text-sm  font-semibold text-black' placeholder="Password"/>
+                    <input className='py-3 px-5 rounded-full text-sm  font-semibold text-black' placeholder="Email"
+                          onChange={(e)=>setEmail(e.target.value)}
+                    />
+                    <input className='py-3 px-5 rounded-full text-sm  font-semibold text-black' placeholder="Password"
+                         onChange={(e)=>setPassword(e.target.value)}
+                     />
 
                </main>
 
                 <main className='flex flex-col space-y-4'>
-                      <button className='bg-white py-2 text-lg font-semibold rounded-xl' style={{color:"#F54B64"}}>Continue</button>
+                      <button className='bg-white py-2 text-lg font-semibold rounded-xl' style={{color:"#F54B64"}}
+                        onClick={siginIn}
+                      >Continue</button>
                      
                 </main> 
 
@@ -92,8 +120,8 @@ export default function SignIn() {
                      <h5 className='text-center text-xl font-semibold' >Or</h5>
 
                      <button className='py-3 text-sm font-semibold rounded-xl' style={{"backgroundColor":"#F54B64"}}
-                      onClick={handleOnClick }
-                     >Continue with Cyberconnect
+                     
+                     >Continue with Google
                      
                      </button>
                    

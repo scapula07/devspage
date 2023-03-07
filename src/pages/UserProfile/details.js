@@ -5,7 +5,7 @@ import {BsFillGridFill,BsImages} from "react-icons/bs"
 import {BiGitRepoForked} from "react-icons/bi"
 import {RiTeamFill } from "react-icons/ri"
 import {GoKebabVertical,GoFileSubmodule} from "react-icons/go"
-
+import { Outlet } from 'react-router-dom'
 
 export default function Details() {
   return (
@@ -58,7 +58,7 @@ export default function Details() {
 
 
              <div className='w-full  relative z-30 px-8'>
-                         <main className='flex  pb-4 absolute w-full space-x-12  '>
+                         <main className='flex  pb-4 absolute w-full space-x-12 bg-slate-800 '>
                             <BsFillGridFill className='text-2xl text-slate-500 hover:text-amber-700'/>
                             <BiGitRepoForked className='text-2xl text-slate-500 hover:text-amber-700'/>
                             <RiTeamFill  className='text-2xl text-slate-500 hover:text-amber-700'/>
@@ -66,7 +66,11 @@ export default function Details() {
                             <BsImages className='text-2xl text-slate-500 hover:text-amber-700'/>
                          </main>
 
-                         inex
+                           <div  >
+                             
+                               <Outlet />
+
+                           </div>
 
                     </div>
     </div>

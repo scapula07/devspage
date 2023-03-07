@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import {GoKebabVertical,GoFileSubmodule,GoPrimitiveDot} from "react-icons/go"
 import {MdAdd} from "react-icons/md"
@@ -8,14 +8,17 @@ import Friend from './friends'
 import ChatBox from './ChatBox'
 import { useAuth } from '../../utils/auth'
 import { Client } from '@xmtp/xmtp-js'
+import { Link } from 'react-router-dom'
 
 
 export default function Messenger() {
     
-        
+    const [client,setClient]=useState()
     const { connectWallet} =useAuth()
-    
-     
+  
+    const [friends,setFriends]=useState()
+
+   
     useEffect(()=>{
 
         const initClient=async()=>{
@@ -28,13 +31,25 @@ export default function Messenger() {
      
 
             const xmtp = await Client.create( signer)
+            setClient( xmtp )
             console.log( xmtp,"xxxxx")
          
         }
         initClient()
       },[])
 
+      useEffect(()=>{
+        const fetchAllConv=async()=>{
+          const conversations = client.conversations
+          const allConversations = await conversations.list()
 
+          console.log(allConversations,"")
+          setFriends(allConversations)
+        }
+        fetchAllConv()
+       },[])
+
+     console.log(friends,"ff")
 
   return (
     <>
@@ -73,9 +88,18 @@ export default function Messenger() {
           
            <div className='h-full pt-80 overflow-y-scroll' >
                <div className='flex flex-col space-y-2' style={{"height":"80vh"}}>
-                    {activeFriends.map((friend)=>{
+                    {friends?.map((conv)=>{
                         return(
-                            <Friend friend={friend}/>
+                            <Link to="/chats"  
+                              state={{
+                                   conv,
+                                   client,
+                                  }}
+                              >
+                                   <Friend friend={conv} />
+                            
+                             </Link>
+                          
                         )
                     })
 
@@ -87,7 +111,7 @@ export default function Messenger() {
        
     </div>
        
-       {/* <ChatBox /> */}
+   
     </>
   )
 }

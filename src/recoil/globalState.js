@@ -11,4 +11,15 @@ export const AddressState =atom({
     key:"accessToken",
     default:""
  })
+
+ export const UserState =atom({
+    key:"user",
+    default:{}
+ })
+ export const CCProfileState =atom({
+    key:"ccProfile",
+    default:{}
+ })
+
+ 
  

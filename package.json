@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.9",
+    "@cyberlab/cyberconnect-v2": "^0.0.1-alpha.16",
     "@ethersproject/providers": "^5.7.2",
     "@lit-protocol/sdk-browser": "^1.1.248",
     "@livepeer/react": "^2.2.5",
@@ -35,6 +36,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.2",
     "workbox-background-sync": "^6.5.4",

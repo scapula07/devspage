@@ -1,6 +1,8 @@
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import {getFirestore} from "firebase/firestore"
+import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword ,signOut} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCIFa1gbo2BWLuHAo3Oozozyt5jK_UShVY",
@@ -15,3 +17,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+export const auth =getAuth(app)
+export const db=getFirestore()
+
+export const signUp=(email,password)=>{
+  return createUserWithEmailAndPassword(auth,email,password)
+}
+export const logIn=(email,password)=>{
+  return signInWithEmailAndPassword(auth,email,password)
+}
