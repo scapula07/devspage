@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect,useState,useMemo } from 'react'
 import {TbArrowNarrowLeft} from "react-icons/tb"
 import {GoKebabVertical,GoFileSubmodule} from "react-icons/go"
 import StorieImg from "../../assets/storieImg.png"
+import { arrayify } from '@ethersproject/bytes';
+import {
+    NotifiContext,
+    NotifiInputFieldsText,
+    NotifiInputSeparators,
+    NotifiSubscriptionCard,
+  } from '@notifi-network/notifi-react-card';
+  import '@notifi-network/notifi-react-card/dist/index.css';
+  import { useAuth } from '../../utils/auth';
+  import { useNotifiClient } from '@notifi-network/notifi-react-hooks';
 
 const NotficationCard=({msg})=>{
    
@@ -26,9 +36,50 @@ const NotficationCard=({msg})=>{
     )
 }
 export default function Notfications() {
+ 
+    const {connectWallet}=useAuth()
+ 
+    const signer = useMemo(async() => {
+        const provider = await connectWallet();
+        const signer = await provider.getSigner();
+        
+        console.log(signer,"smm")
+        return  signer;
+      }, []);
+    
+    console.log(signer,"sss")
+
+  
+
+  
+
+
+
+    
+
+    const inputLabels= {
+        label: {
+          email: 'Email',
+          sms: 'Text Message',
+          telegram: 'Telegram',
+        },
+        placeholderText: {
+          email: 'Email',
+        },
+      };
+
+      const inputSeparators = {
+        smsSeparator: {
+          content: 'OR',
+        },
+        emailSeparator: {
+          content: 'OR',
+        },
+      };
+    
   return (
     <>
-    <div>
+    {/* <div>
          <div className='flex w-full justify-between items-center  py-6 absolute  z-10 pr-8  '>
             <TbArrowNarrowLeft className='text-3xl'/>
           
@@ -56,7 +107,25 @@ export default function Notfications() {
           
          
        
-    </div>
+    </div> */}
+  
+     <NotifiContext
+      dappAddress="junitest.xyz"
+        env="Development"
+        signMessage={async (message) => {
+        const result = await signer?.signMessage(message);
+        return arrayify(result);
+        }}
+        walletPublicKey="0x7b158840956385dE998fC306053dBEE0A007dB3b"
+        walletBlockchain="ETHEREUM" 
+        >
+        <NotifiSubscriptionCard
+        cardId="71562316475a4171ae9c980adaefab7d"
+        inputLabels={inputLabels}
+        inputSeparators={inputSeparators}
+        darkMode //optional
+        />
+        </NotifiContext>
        
     
     </>

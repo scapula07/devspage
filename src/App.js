@@ -48,6 +48,7 @@ import PostContent from './pages/Content/postContent';
 const ccProfileNftContract="0x57e12b7a5f38a7f9c23ebd0400e6e53f2a45f271"
 const profile_nft_operator="0x85AAc6211aC91E92594C01F8c9557026797493AE"
 
+
 function App() {
 
   const web3 = new Web3(window.ethereum)
@@ -88,7 +89,7 @@ function App() {
             const provider = await connectWallet();
              const signer = provider.getSigner();
              const address = await signer.getAddress();
-          
+             
         
 
           
